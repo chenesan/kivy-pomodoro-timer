@@ -5,21 +5,27 @@
     goal_input: goal_input
 
     Label:
-        font_size: 70  
+        font_size: 30  
         center_x: root.width / 2
-        top: root.top - 300
+        center_y: root.height / 2
         text: root.goal        
 
     Label:
-        font_size: 70  
+        font_size: 70
         center_x: root.width / 2
         top: root.top - 50
         text: root.time_strprop
-        
+
+    Label:
+        font_size: 30
+        center_x: root.width / 2
+        center_y: root.height * 1 / 4.0
+        text: "You have finished " + str(root.finished_tomato) + " tomato times so far!"
+    
     TextInput:
         width: 200
         id: goal_input
-        text: 'What is your goal?'
+        hint_text: 'What is your goal?'
+        focus: False
         multiline: False
-        focus: True
         center: self.parent.center

@@ -26,6 +26,7 @@ class TomatoPlayer(Widget):
     goal_input = ObjectProperty(None)
     goal = StringProperty()
     start = BooleanProperty()
+    finished_tomato = NumericProperty(0)
 
     def get_time_str(self):
         h_str = "00"
@@ -48,16 +49,29 @@ class TomatoPlayer(Widget):
         if self.start:
             self.s -= 1
             if self.s == -1:
-                self.s = 59
                 self.m -= 1
+                if self.m != 0:
+                    self.s = 59
+                else: # restart clock
+                    self.restart()
             self.time_strprop = self.get_time_str()
-        
+
+    def restart(self):
+        self.start = False
+        self.finished_tomato += 1
+        self.goal = ""
+        self.add_widget(self.goal_input)
+        self.h = 0
+        self.m = 25
+        self.s = 0
+        self.time_strprop = "00:25:00"
+            
 
 class TomatoApp(App):
     def build(self):
         tomato = TomatoPlayer()
         tomato.init_task()
-        Clock.schedule_interval(tomato.update, 1.0 / 10)
+        Clock.schedule_interval(tomato.update, 1.0)
         return tomato
 
 if __name__ == "__main__":
