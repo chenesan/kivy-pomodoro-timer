@@ -36,13 +36,13 @@ class TomatoPlayer(Widget):
     def get_goal(self, textinput):
         self.goal = textinput.text
         textinput.text = ""
+        self.remove_widget(self.goal_input)
         self.start = True
         
     def init_task(self):
         self.time_strprop = "00:25:00"
         self.start = False
         self.goal_input.bind(on_text_validate=self.get_goal)
-        print self.goal_input
 
     def update(self, t):
         if self.start:
