@@ -2,9 +2,17 @@
 
 
 <TomatoPlayer>
+    goal_input: goal_input
     Label:
         font_size: 70  
         center_x: root.width / 2
         top: root.top - 50
         text: root.time_strprop
-    
+        
+    TextInput:
+        width: 200
+        id: goal_input
+        text: 'What is your goal?'
+        multiline: False
+        focus: True
+        center: self.parent.center
