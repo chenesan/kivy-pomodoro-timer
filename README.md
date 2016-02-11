@@ -1,8 +1,14 @@
 #Kivy Tomato Clock
 
-A toy tomato clock based on [Kivy](https://kivy.org)
+A toy tomato clock based on [Kivy](https://kivy.org).
 
-TODO:
+Currently only support python2.7 .
+
+##Usage
+
+`python tomato.py`
+
+##TODO
 
 1. Alert/Notification when the time goes zero.
 
