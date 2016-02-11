@@ -2,15 +2,12 @@ import time
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.textinput import TextInput
+from kivy.uix.image import Image
 from kivy.properties import NumericProperty, StringProperty
 from kivy.properties import BooleanProperty, ObjectProperty
-from kivy.vector import Vector
 from kivy.clock import Clock
 
-from kivy.uix.scatter import Scatter
 from kivy.uix.label import Label
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.boxlayout import BoxLayout
 
 def on_enter(instance, value):
     print ('User pressed enter in', instance)
@@ -18,6 +15,7 @@ def on_enter(instance, value):
 def on_text(instance, value):
     print ('User enter text:', value, 'in', instance)    
 
+    
 class TomatoPlayer(Widget):
     h = NumericProperty(0)
     m = NumericProperty(25)
@@ -53,14 +51,18 @@ class TomatoPlayer(Widget):
                 if self.m != 0:
                     self.s = 59
                 else: # restart clock
-                    self.restart()
+                    self.finish_loop_handler()
             self.time_strprop = self.get_time_str()
 
-    def restart(self):
+    def finish_loop_handler(self):
         self.start = False
         self.finished_tomato += 1
         self.goal = ""
         self.add_widget(self.goal_input)
+        img = Image(source='tomato.png')
+        img.center_y = self.height * 1 / 6.0
+        img.center_x = self.width * self.finished_tomato / 10.0 
+        self.add_widget(img)
         self.h = 0
         self.m = 25
         self.s = 0
@@ -71,7 +73,7 @@ class TomatoApp(App):
     def build(self):
         tomato = TomatoPlayer()
         tomato.init_task()
-        Clock.schedule_interval(tomato.update, 1.0)
+        Clock.schedule_interval(tomato.update, 0.001)
         return tomato
 
 if __name__ == "__main__":
