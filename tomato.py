@@ -1,13 +1,12 @@
-import time
 from kivy.app import App
-from kivy.uix.widget import Widget
-from kivy.uix.textinput import TextInput
-from kivy.uix.image import Image
-from kivy.properties import NumericProperty, StringProperty
-from kivy.properties import BooleanProperty, ObjectProperty
 from kivy.clock import Clock
-
+from kivy.properties import BooleanProperty, ObjectProperty
+from kivy.properties import NumericProperty, StringProperty
+from kivy.uix.image import Image
 from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.uix.widget import Widget
+
 
 def on_enter(instance, value):
     print ('User pressed enter in', instance)
