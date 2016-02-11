@@ -2,7 +2,8 @@ import time
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.textinput import TextInput
-from kivy.properties import NumericProperty, StringProperty, ObjectProperty
+from kivy.properties import NumericProperty, StringProperty
+from kivy.properties import BooleanProperty, ObjectProperty
 from kivy.vector import Vector
 from kivy.clock import Clock
 
@@ -24,6 +25,7 @@ class TomatoPlayer(Widget):
     time_strprop = StringProperty()
     goal_input = ObjectProperty(None)
     goal = StringProperty()
+    start = BooleanProperty()
 
     def get_time_str(self):
         h_str = "00"
@@ -34,18 +36,21 @@ class TomatoPlayer(Widget):
     def get_goal(self, textinput):
         self.goal = textinput.text
         textinput.text = ""
+        self.start = True
         
     def init_task(self):
         self.time_strprop = "00:25:00"
+        self.start = False
         self.goal_input.bind(on_text_validate=self.get_goal)
         print self.goal_input
 
     def update(self, t):
-        self.s -= 1
-        if self.s == -1:
-            self.s = 59
-            self.m -= 1
-        self.time_strprop = self.get_time_str()
+        if self.start:
+            self.s -= 1
+            if self.s == -1:
+                self.s = 59
+                self.m -= 1
+            self.time_strprop = self.get_time_str()
         
 
 class TomatoApp(App):
