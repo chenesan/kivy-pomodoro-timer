@@ -72,7 +72,7 @@ class TomatoApp(App):
     def build(self):
         tomato = TomatoPlayer()
         tomato.init_task()
-        Clock.schedule_interval(tomato.update, 0.001)
+        Clock.schedule_interval(tomato.update, 1.0)
         return tomato
 
 if __name__ == "__main__":
