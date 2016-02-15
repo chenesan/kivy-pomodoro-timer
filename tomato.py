@@ -6,7 +6,7 @@ from kivy.uix.image import Image
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
-
+from gi.repository import Notify
 
 def on_enter(instance, value):
     print ('User pressed enter in', instance)
@@ -24,6 +24,7 @@ class TomatoPlayer(Widget):
     goal = StringProperty()
     start = BooleanProperty()
     finished_tomato = NumericProperty(0)
+    record = open('tomato_record.txt','a')
 
     def get_time_str(self):
         h_str = "00"
@@ -47,15 +48,22 @@ class TomatoPlayer(Widget):
             self.s -= 1
             if self.s == -1:
                 self.m -= 1
-                if self.m != 0:
+                if self.m != -1:
                     self.s = 59
                 else: # restart clock
+                    self.finished_tomato += 1
                     self.finish_loop_handler()
             self.time_strprop = self.get_time_str()
-
+            
     def finish_loop_handler(self):
         self.start = False
-        self.finished_tomato += 1
+        self.record.write("Finish today's {c} tomato: {goal}".format(
+            c=self.finished_tomato,
+            goal=self.goal
+        ))
+        # TODO: Currently the it will not show the tomato icon.
+        notification = Notify.Notification.new("Times up!\n You", body=self.goal, icon="tomato.png")
+        notification.show()
         self.goal = ""
         self.add_widget(self.goal_input)
         img = Image(source='tomato.png')
@@ -66,10 +74,11 @@ class TomatoPlayer(Widget):
         self.m = 25
         self.s = 0
         self.time_strprop = "00:25:00"
-            
+        
 
 class TomatoApp(App):
     def build(self):
+        Notify.init('tomato')
         tomato = TomatoPlayer()
         tomato.init_task()
         Clock.schedule_interval(tomato.update, 1.0)
