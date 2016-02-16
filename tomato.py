@@ -112,7 +112,7 @@ class TomatoApp(App):
         Notify.init('tomato')
         tomato = TomatoPlayer()
         tomato.init_task()
-        Clock.schedule_interval(tomato.update, 1.0/1000)
+        Clock.schedule_interval(tomato.update, 1.0)
         self.bind(on_stop=tomato.save_state)
         return tomato
 
