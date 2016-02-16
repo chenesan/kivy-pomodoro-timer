@@ -1,6 +1,6 @@
-#Kivy Tomato Clock
+#Kivy Pomodoro Timer
 
-A toy tomato clock based on [Kivy](https://kivy.org).
+A toy pomodoro timer based on [Kivy](https://kivy.org).
 
 Currently only support python2.7 .
 
@@ -10,16 +10,12 @@ Currently only support python2.7 .
 
 ##TODO
 
-1. Alert/Notification when the time goes zero.
+1. Add timer for (short/long)break between tasks.
 
-2. Add timer for (short/long)break between tasks.
+2. Start/Stop timer
 
-3. Record the finished goals.
+3. Add good-looking UI.
 
-4. Start/Stop timer
-
-5. Add good-looking UI.
-
-6. Seperate the working logic(controller) and the way to show widget(view).
+4. Seperate the working logic(controller) and the way to show widget(view).
 
 
